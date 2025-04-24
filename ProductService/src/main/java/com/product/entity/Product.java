@@ -16,4 +16,8 @@ public class Product {
 	private int productId;
 	private String productName;
 	private int productQty;
+	private double productPrice;
+	private double productEarnings;
+	private int productAvailable;
+	private int productSold;
 }
