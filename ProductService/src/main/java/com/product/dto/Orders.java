@@ -7,6 +7,6 @@ public class Orders {
 	
 	private int orderId;
 	private int productId;
-	private int orderQuantity;
+	private int productQty;
 
 }

@@ -40,13 +40,14 @@ public class ProductService {
 	public ResponseEntity<?> updateProduct(Orders order) throws InsufficientProducts {
 		// TODO Auto-generated method stub
 		Product newProduct= productRepository.findById(order.getProductId()).orElse(null);
-		if(order.getOrderQuantity()>newProduct.getProductAvailable()) {
+		if(order.getProductQty()>newProduct.getProductAvailable()) {
 			throw new InsufficientProducts("not enough products available, available products are: "+newProduct.getProductAvailable());
 		}
-		newProduct.setProductAvailable(newProduct.getProductAvailable()-order.getOrderQuantity());
-		newProduct.setProductEarnings(newProduct.getProductEarnings()+newProduct.getProductPrice()*order.getOrderQuantity());
-		newProduct.setProductSold(newProduct.getProductSold()+ order.getOrderQuantity());
+		newProduct.setProductAvailable(newProduct.getProductAvailable()-order.getProductQty());
+		newProduct.setProductEarnings(newProduct.getProductEarnings()+newProduct.getProductPrice()*order.getProductQty());
+		newProduct.setProductSold(newProduct.getProductSold()+ order.getProductQty());
 		Product updatedProduct =productRepository.save(newProduct);	
+		System.err.println("updated");
 		return ResponseEntity.ok(updatedProduct);
 	}
 
